@@ -17,7 +17,6 @@ export class FireBaseResolve implements Resolve<any> {
         return this.firebaseService.getUserDetails().once('value').then(data => {
             if (data) {
                 let adminList= [];
-                console.log(data.val());
                 data.val().forEach(element => {
                     if(element['type'] === 'admin'){
                         adminList.push(element['name']);

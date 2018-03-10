@@ -17,16 +17,26 @@ export class FollowComponent {
   }
 
 open(event){
+    
+    let admin =  this.admin;
     if(event.target.style['backgroundColor'].length === 0){
         event.target.style['backgroundColor'] = "#e55e5e"
         let choice : any;
-        if(window.localStorage.getItem('feedChoice')){
-            choice = window.localStorage.getItem('feedChoice');
-        }
-        this.firebaseService.addFollowers('admin');
+        this.firebaseService.addFollowers(admin);
     }else{
         event.target.style['backgroundColor'] = '';
+        this.firebaseService.removeFollowers(admin);
     }
+}
+
+getFeed(){
+    this.firebaseService.getFeed()
+    .subscribe(
+        comments => console.log(comments), //Bind to view
+         err => {
+             // Log errors if any
+             console.log(err);
+   });
 }
 
 }
