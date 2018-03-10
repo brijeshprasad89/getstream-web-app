@@ -1,5 +1,5 @@
 <div class="col-sm-4">
-        <button type="button" class="btn btn-default" (click)="open($event)">
+        <button type="button" class="btn btn-default" [ngStyle]="{'background-color': background_color }" (click)="follow($event)">
                 {{admin}}
         </button>
 </div>

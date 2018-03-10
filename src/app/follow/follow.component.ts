@@ -4,6 +4,7 @@ import {FirebaseService} from '../services/firebase';
 @Component({
   selector: 'follow',
   templateUrl: 'follow.component.html',
+  styleUrls: ['./follow.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 
@@ -12,11 +13,15 @@ export class FollowComponent {
   constructor( public firebaseService: FirebaseService ) {
   }
 
+  background_color: String ;
   ngOnInit() {
     
+    if(window.localStorage.getItem('feedChoice').indexOf(this.admin) >= 0){
+        this.background_color = "#e55e5e";
+    }
   }
 
-open(event){
+follow(event){
     
     let admin =  this.admin;
     if(event.target.style['backgroundColor'].length === 0){
@@ -27,16 +32,6 @@ open(event){
         event.target.style['backgroundColor'] = '';
         this.firebaseService.removeFollowers(admin);
     }
-}
-
-getFeed(){
-    this.firebaseService.getFeed()
-    .subscribe(
-        comments => console.log(comments), //Bind to view
-         err => {
-             // Log errors if any
-             console.log(err);
-   });
 }
 
 }
